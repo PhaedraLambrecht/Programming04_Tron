@@ -10,7 +10,10 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 
-SDL_Window* g_window{};
+#include "Time.h"
+#include <chrono>
+#include <thread>
+
 
 void PrintSDLVersion()
 {
@@ -49,7 +52,7 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
 
-	g_window = SDL_CreateWindow(
+	m_window = SDL_CreateWindow(
 		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
@@ -57,12 +60,12 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		480,
 		SDL_WINDOW_OPENGL
 	);
-	if (g_window == nullptr) 
+	if (m_window == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
 
-	Renderer::GetInstance().Init(g_window);
+	Renderer::GetInstance().Init(m_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
 }
@@ -70,8 +73,8 @@ dae::Minigin::Minigin(const std::string &dataPath)
 dae::Minigin::~Minigin()
 {
 	Renderer::GetInstance().Destroy();
-	SDL_DestroyWindow(g_window);
-	g_window = nullptr;
+	SDL_DestroyWindow(m_window);
+	m_window = nullptr;
 	SDL_Quit();
 }
 
@@ -83,12 +86,31 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
-	// todo: this update loop could use some work.
+
+
 	bool doContinue = true;
+	float lag{ 0.0f };
+
 	while (doContinue)
 	{
+		Time::GetInstance().Update();
+		lag += Time::GetInstance().GetDeltaTime();
+
+
 		doContinue = input.ProcessInput();
+
+		while (lag >= Time::GetInstance().GetFixedTimeStep())
+		{
+			// fixedUpdate(Time::GetInstance().GetFixedTimeStep());
+			lag -= Time::GetInstance().GetFixedTimeStep();
+
+		}
+
 		sceneManager.Update();
 		renderer.Render();
+
+
+		const auto sleepTime = Time::GetInstance().GetPreviousTime() + std::chrono::milliseconds(Time::GetInstance().GetMSPerFrame()) - std::chrono::high_resolution_clock::now();
+		std::this_thread::sleep_for(sleepTime);
 	}
 }
