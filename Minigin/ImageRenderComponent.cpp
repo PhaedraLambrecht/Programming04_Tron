@@ -14,7 +14,7 @@ namespace dae
 	{
 		if (GetOwner()->HasComponent<ImageComponent>())
 		{
-			m_pImage = GetOwner()->AddComponent<ImageComponent>();
+			m_pImage = GetOwner()->GetComponent<ImageComponent>();
 		}
 		else
 		{
@@ -25,10 +25,6 @@ namespace dae
 		if (GetOwner()->HasComponent<TransformComponent>())
 		{
 			m_pTransform = GetOwner()->GetComponent<TransformComponent>();
-		}
-		else
-		{
-			m_pTransform = GetOwner()->AddComponent<TransformComponent>();
 		}
 	}
 
@@ -51,7 +47,7 @@ namespace dae
 		}
 
 
-		const auto& position = m_pTransform->GetPosition();
+		const auto& position = m_pTransform->GetLocalPosition();
 		Renderer::GetInstance().RenderTexture(*m_pImage->GetTexture(), position.x, position.y);
 	}
 }

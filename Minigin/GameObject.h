@@ -30,8 +30,18 @@ namespace dae
 
 		template <typename T> T* AddComponent();
 		template <typename T> T* GetComponent() const;
-		template <typename T> T* HasComponent() const;
+		template <typename T> bool HasComponent() const;
 		template <typename T> void RemoveComponent();
+
+		// Scenegraph
+		void SetParent(std::shared_ptr<GameObject> parent, bool keepWorldPos);
+		std::shared_ptr<GameObject> GetParent() const;
+
+		int GetChildCount() const;
+		GameObject* GetChildAt(int index) const;
+		std::vector<GameObject*> GetChildren() const;
+
+		TransformComponent& GetTransform() const;
 
 
 	private:
@@ -39,6 +49,13 @@ namespace dae
 		std::vector<std::unique_ptr<BaseComponent>> m_pComponents;
 		TransformComponent* m_pTransform;
 
+		// Scenegraph
+		std::vector<GameObject*> m_pChildren;
+		std::shared_ptr<GameObject> m_pParent;
+
+
+		void AddChild(GameObject* pChild);
+		void RemoveChild(GameObject* child);
 	};
 
 
@@ -64,33 +81,34 @@ namespace dae
 	{
 		static_assert(std::is_base_of<BaseComponent, T>::value, "Provided template argument is not a component");
 
-		// Search for a component of the specified type in the GameObject
-		for (const auto& component : m_pComponents)
-		{
-			// Check if the component is of the specified type
-			T* foundComponent = dynamic_cast<T*>(component.get());
 
-			if (foundComponent)
+		// Use std::find_if with a lambda function to search for the component
+		auto it = std::find_if(m_pComponents.begin(), m_pComponents.end(), [](const auto& component) 
 			{
-				return foundComponent;
-			}
+				// Check if the component is of the specified type & return this awnser
+				return dynamic_cast<T*>(component.get()) != nullptr;
+			});
+
+
+		if (it != m_pComponents.end()) 
+		{
+			return dynamic_cast<T*>(it->get());
 		}
 
 
 		return nullptr;
 	}
 
-
 	template<typename T>
-	inline T* GameObject::HasComponent() const
+	inline bool GameObject::HasComponent() const
 	{
 		const auto components = GetComponent<T>();
 
 		if (components != nullptr)
 		{
-			return components;
+			return true;
 		}
-		return nullptr;
+		return false;
 
 	}
 
@@ -100,18 +118,16 @@ namespace dae
 		static_assert(std::is_base_of<BaseComponent, T>::value, "Provided template argument is not a component");
 
 
-		// Search for a component of the specified type in the GameObject
-		for (const auto& component : m_pComponents)
-		{
-			// Check if the component is of the specified type
-			T* foundComponent = dynamic_cast<T*>(component.get());
-
-			if (foundComponent != nullptr)
+		// Use iterator to efficiently find and erase the component
+		auto it = std::remove_if(m_pComponents.begin(), m_pComponents.end(), [](const auto& component) 
 			{
-				foundComponent = nullptr;
-			}
-		}
+				// Check if the component is of the specified type & return this awnser
+				return dynamic_cast<T*>(component.get()) != nullptr;
+			});
 
+
+		// Erase the removed components from the vector
+		m_pComponents.erase(it, m_pComponents.end());
 	}
 
 }

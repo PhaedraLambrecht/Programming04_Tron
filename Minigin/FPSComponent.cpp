@@ -18,7 +18,7 @@ namespace dae
 		}
 		else
 		{
-			m_pText = GetOwner()->GetComponent<TextComponent>();
+			m_pText = GetOwner()->AddComponent<TextComponent>();
 		}
 	}
 
@@ -35,10 +35,15 @@ namespace dae
 			throw std::invalid_argument("FPSComponent needs a TextComponent");
 		}
 
-		m_fps =  1.0f / Time::GetInstance().GetDeltaTime();
+		float newFPS =  1.0f / Time::GetInstance().GetDeltaTime();
 
-		std::string fpsText = std::to_string((int)m_fps) + "FPS"; // todo: Look into what caused the issue that this can't be in the line below.
-		m_pText->SetText(fpsText); 
-		
+
+		if (newFPS != m_fps)
+		{
+			m_fps = newFPS;
+
+			std::string fpsText = std::to_string((int)m_fps) + "FPS";
+			m_pText->SetText(fpsText);
+		}	
 	}
 }

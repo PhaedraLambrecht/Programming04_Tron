@@ -2,7 +2,7 @@
 #include "Singleton.h"
 #include <chrono>
 
-//todo: Add in source
+
 namespace dae
 {
 	class Time : public Singleton<Time>
@@ -15,7 +15,7 @@ namespace dae
 		// Copy and move
 		Time(const Time& other) = delete;
 		Time(Time&& other) = delete;
-		Time& operator=(const Time& other) = delete;
+		Time& operator=(const Time& other) = delete;	
 		Time& operator=(Time&& other) = delete;
 
 

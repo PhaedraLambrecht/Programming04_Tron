@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 
+
 namespace dae
 {
 	TextRenderComponent::TextRenderComponent(GameObject* Owner)
@@ -26,7 +27,7 @@ namespace dae
 		}
 		else
 		{
-			m_pTransform = GetOwner()->AddComponent<TransformComponent>();
+			m_pTransform = nullptr;
 		}
 	}
 
@@ -50,7 +51,7 @@ namespace dae
 		}
 	
 		
-		const auto& position = m_pTransform->GetPosition();
+		const auto& position = m_pTransform->GetLocalPosition();
 		Renderer::GetInstance().RenderTexture(*m_pText->GetTexture(), position.x, position.y);
 	}
 }
