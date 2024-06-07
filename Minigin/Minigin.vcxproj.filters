@@ -1,165 +1,355 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{d77566bc-c7a8-4e6b-80ea-4c931763035c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="imgui\Source Files">
+      <UniqueIdentifier>{c40a50bb-e0bd-4a9c-9875-4b0b06a7c7d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="imgui\Header Files">
+      <UniqueIdentifier>{ab558e10-b17f-46bb-9b84-18f7dae1d3cf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components">
-      <UniqueIdentifier>{36d90690-2804-4bd0-9306-c057e087507d}</UniqueIdentifier>
+    <Filter Include="imgui\Backend Files">
+      <UniqueIdentifier>{8f8df8b8-d196-4886-a140-4ef96d50ab91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components">
-      <UniqueIdentifier>{1efd989f-5e36-43cf-bd42-da10e8d17d34}</UniqueIdentifier>
+    <Filter Include="imgui\Backend Files\Header Files">
+      <UniqueIdentifier>{bca2c9d5-2554-40b5-bca7-a058c355f583}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\Data">
-      <UniqueIdentifier>{751e20c0-71b7-42e1-88d3-a2e11b4bdba3}</UniqueIdentifier>
+    <Filter Include="imgui\Backend Files\Source Files">
+      <UniqueIdentifier>{a9e8b790-116b-4c39-8cbc-4d2c2ca4a695}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\Update">
-      <UniqueIdentifier>{06fdd14c-0c5a-4dca-bc64-d57c55877889}</UniqueIdentifier>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{bf506099-a2b2-4490-b249-49fb3782d09e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Components\Render">
-      <UniqueIdentifier>{662e5eea-9269-4531-ada2-abb08687083e}</UniqueIdentifier>
+    <Filter Include="Componennts">
+      <UniqueIdentifier>{15d31349-1ac6-454e-84b7-5a2e173eb3d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Data">
-      <UniqueIdentifier>{ee76e308-2a1d-4a02-8b08-1feeab2aa0c1}</UniqueIdentifier>
+    <Filter Include="Input">
+      <UniqueIdentifier>{0e6589af-406f-41fd-be58-7fed5ddb1d55}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Update">
-      <UniqueIdentifier>{19411e3e-9857-4054-9b74-1f12b6f0af92}</UniqueIdentifier>
+    <Filter Include="Events">
+      <UniqueIdentifier>{8081f976-f74b-4673-8e90-d9b0227256a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\Render">
-      <UniqueIdentifier>{67473be4-0b3f-4aca-92f2-9685a364a8f5}</UniqueIdentifier>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{dfc812dd-4ec7-4951-bef7-6466b102936e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{0d0f9e6e-074a-497b-bace-fa8127038006}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{325a40c9-79fa-433a-ab3a-c309e1604f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{51e1147c-aabb-42f0-ba84-7f98c9387a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{4d54c7fc-454f-41c6-8348-443fad319686}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imconfig.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_internal.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imgui_plot.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_rectpack.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_textedit.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\imstb_truetype.h">
+      <Filter>imgui\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.h">
+      <Filter>imgui\Backend Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.h">
+      <Filter>imgui\Backend Files\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="Minigin.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Sound\SoundSystem.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Minigin.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sound\SoundManager.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="BaseComponent.h">
-      <Filter>Header Files\Components</Filter>
+    <ClInclude Include="Sound\SDLSoundSystem.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="ImageComponent.h">
-      <Filter>Header Files\Components\Data</Filter>
+    <ClInclude Include="Sound\NullSoundSystem.h">
+      <Filter>Sound</Filter>
     </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Header Files\Components\Data</Filter>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Header Files\Components\Data</Filter>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Header Files\Components\Update</Filter>
+    <ClInclude Include="Resources\ResourceManager.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="ImageRenderComponent.h">
-      <Filter>Header Files\Components\Render</Filter>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="TextRenderComponent.h">
-      <Filter>Header Files\Components\Render</Filter>
+    <ClInclude Include="Input\InputManager.h">
+      <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Input\Controler.h">
+      <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Header Files\Components\Update</Filter>
+    <ClInclude Include="Input\Controller.h">
+      <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Events\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\AddPointsComponnent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\AttackComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\BaseComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\BulletMovementComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\CollisionComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\FPSComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\HealthComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\ImageComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\ImageRenderComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\LivesComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\PlayManualComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\RotatorComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\SchootComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\ScoreComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\TextComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\TextRenderComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Componennts\TransformComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\AddPointsCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\DamageCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\MoveCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\SchootCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Font.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Renderer.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Texture2D.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Transform.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyController.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemyComponent.h">
+      <Filter>Componennts</Filter>
+    </ClInclude>
+    <ClInclude Include="RecognizerEnemy.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_demo.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_draw.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_plot.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_tables.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\imgui_widgets.cpp">
+      <Filter>imgui\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_sdl2.cpp">
+      <Filter>imgui\Backend Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\3rdParty\imgui-1.89.4\backends\imgui_impl_opengl2.cpp">
+      <Filter>imgui\Backend Files\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="Minigin.cpp" />
+    <ClCompile Include="Sound\SoundManager.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sound\SoundSystem.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Minigin.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sound\NullSoundSystem.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
-    <ClCompile Include="BaseComponent.cpp">
-      <Filter>Source Files\Components</Filter>
+    <ClCompile Include="Scene\Scene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="ImageComponent.cpp">
-      <Filter>Source Files\Components\Data</Filter>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Source Files\Components\Data</Filter>
+    <ClCompile Include="Resources\ResourceManager.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
-      <Filter>Source Files\Components\Data</Filter>
+    <ClCompile Include="Input\InputManager.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Source Files\Components\Update</Filter>
+    <ClCompile Include="Input\Controler.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="TextRenderComponent.cpp">
-      <Filter>Source Files\Components\Render</Filter>
+    <ClCompile Include="Input\Controller.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="ImageRenderComponent.cpp">
-      <Filter>Source Files\Components\Render</Filter>
+    <ClCompile Include="Events\Event.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Events\EventManager.cpp">
+      <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Source Files\Components\Update</Filter>
+    <ClCompile Include="Componennts\AddPointsComponnent.cpp">
+      <Filter>Componennts</Filter>
     </ClCompile>
+    <ClCompile Include="Componennts\AttackComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\BaseComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\BulletMovementComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\CollisionComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\FPSComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\HealthComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\ImageComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\ImageRenderComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\LivesComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\PlayManualComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\RotatorComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\SchootComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\ScoreComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\TextComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\TextRenderComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Componennts\TransformComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\AddPointsCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Command.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\DamageCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\MoveCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\SchootCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Font.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Renderer.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Texture2D.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Transform.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyController.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemyComponent.cpp">
+      <Filter>Componennts</Filter>
+    </ClCompile>
+    <ClCompile Include="RecognizerEnemy.cpp" />
+    <ClCompile Include="Sound\SDLSoundSystem.cpp" />
   </ItemGroup>
 </Project>

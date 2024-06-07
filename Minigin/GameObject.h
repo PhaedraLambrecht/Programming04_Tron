@@ -1,5 +1,5 @@
 #pragma once
-#include "TransformComponent.h"
+#include "Componennts/TransformComponent.h"
 #include <memory>
 #include <vector>
 #include <algorithm>
@@ -9,13 +9,13 @@ namespace dae
 {
 	class BaseComponent;
 	class TransformComponent;
-
+	class CollisionComponent;
 
 	class GameObject final
 	{
 	public:
 
-		GameObject();
+		GameObject(int depthvalue = 0);
 		~GameObject();
 
 		GameObject(const GameObject& other) = delete;
@@ -26,6 +26,7 @@ namespace dae
 
 
 		void Update();
+		void FixedUpdate(const float fixedTimeStep);
 		void Render() const;
 
 		template <typename T> T* AddComponent();
@@ -33,16 +34,20 @@ namespace dae
 		template <typename T> bool HasComponent() const;
 		template <typename T> void RemoveComponent();
 
+
 		// Scenegraph
-		void SetParent(std::shared_ptr<GameObject> parent, bool keepWorldPos);
-		std::shared_ptr<GameObject> GetParent() const;
+		void SetParent(GameObject* parent, bool keepWorldPos);
+		GameObject* GetParent() const;
 
 		int GetChildCount() const;
 		GameObject* GetChildAt(int index) const;
 		std::vector<GameObject*> GetChildren() const;
 
-		TransformComponent& GetTransform() const;
 
+		bool IsReadyForDestruction();
+		int GetDrawDepth();
+		void MarkForDestruction();
+		
 
 	private:
 
@@ -51,11 +56,16 @@ namespace dae
 
 		// Scenegraph
 		std::vector<GameObject*> m_pChildren;
-		std::shared_ptr<GameObject> m_pParent;
+		GameObject* m_pParent;
+	
+
+		bool m_IsMarkedForDestruction{ false };
+		int m_DepthValue{ 0 };
 
 
 		void AddChild(GameObject* pChild);
 		void RemoveChild(GameObject* child);
+
 	};
 
 

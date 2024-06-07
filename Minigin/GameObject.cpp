@@ -1,28 +1,40 @@
 #include "GameObject.h"
-#include "ResourceManager.h"
-#include "Renderer.h"
+#include "Resources/ResourceManager.h"
+#include "Base/Renderer.h"
+#include "Events/EventManager.h"
+#include "Componennts/CollisionComponent.h"
 #include <iostream>
 
 
 namespace dae
 {
-	GameObject::GameObject()
+	GameObject::GameObject(int depthvalue)
+		:m_pChildren{}
+		,m_pParent{}
+		,m_DepthValue{depthvalue}
 	{
 		m_pTransform = AddComponent<TransformComponent>();
 	}
 
 	GameObject::~GameObject()
 	{
-		std::cout << "\nGameObject\n";
+		std::cout << "\n------ GameObject ------\n";
 	}
 
 
 	void GameObject::Update()
 	{
-		// todo: easiest way to fix dead objects is walking trough the loop backwards
 		for (const auto& component : m_pComponents)
 		{
 			component->Update();
+		}
+	}
+
+	void GameObject::FixedUpdate(const float fixedTimeStep)
+	{		
+		for (const auto& component : m_pComponents)
+		{
+			component->FixedUpdate(fixedTimeStep);
 		}
 	}
 
@@ -31,10 +43,11 @@ namespace dae
 		for (const auto& component : m_pComponents)
 		{
 			component->Render();
+			component->RenderUI();
 		}
 	}
 
-	void GameObject::SetParent(std::shared_ptr<GameObject> parent, bool keepWorldPos)
+	void GameObject::SetParent(GameObject* parent, bool keepWorldPos)
 	{
 		if (!parent)
 		{
@@ -46,7 +59,7 @@ namespace dae
 		else
 		{
 			// Is the parent the same as this object?
-			if (parent.get() == this)
+			if (parent == this)
 			{
 				throw std::invalid_argument("Parent cant be the same as the object it is set to");
 
@@ -55,7 +68,7 @@ namespace dae
 			// Is the new parent an alrady existing child to this object?
 			for (int i{ 0 }; i < GetChildCount(); ++i)
 			{
-				if (GetChildAt(i) == parent.get()) 
+				if (GetChildAt(i) == parent) 
 				{
 					throw std::invalid_argument("Parent cant be a previous child");
 				}
@@ -65,15 +78,16 @@ namespace dae
 			// If neither of the above 2, set the transform
 			if (keepWorldPos)
 			{
-				m_pTransform->SetLocalPosition(m_pTransform->GetLocalPosition().x - parent->GetTransform().GetWorldPosition().x,
-											   m_pTransform->GetLocalPosition().y - parent->GetTransform().GetWorldPosition().y);
+				m_pTransform->SetLocalPosition(m_pTransform->GetLocalPosition().x - parent->GetComponent<dae::TransformComponent>()->GetWorldPosition().x,
+											   m_pTransform->GetLocalPosition().y - parent->GetComponent<dae::TransformComponent>()->GetWorldPosition().y);
 			}
 
 			m_pTransform->SwitchDirtyFlag(true);
 		}
 
 
-		if (m_pParent)
+
+		if (m_pParent != nullptr)
 		{
 			m_pParent->RemoveChild( this );
 		}
@@ -86,7 +100,7 @@ namespace dae
 		}
 	}
 
-	std::shared_ptr<GameObject> GameObject::GetParent() const
+	GameObject* GameObject::GetParent() const
 	{
 		return m_pParent;
 	}
@@ -106,9 +120,24 @@ namespace dae
 		return m_pChildren;
 	}
 
-	TransformComponent& GameObject::GetTransform() const
+	bool GameObject::IsReadyForDestruction()
 	{
-		return *m_pTransform;
+		return m_IsMarkedForDestruction;
+	}
+
+	int GameObject::GetDrawDepth()
+	{
+		return m_DepthValue;
+	}
+
+	void GameObject::MarkForDestruction()
+	{
+		std::unique_ptr<Event> event = std::make_unique<Event>();
+		event->eventType = "GameObject Destroyed";
+
+		EventManager::GetInstance().QueueEvent<dae::Event>(std::move(event));
+
+		m_IsMarkedForDestruction = true;
 	}
 
 	void GameObject::AddChild(GameObject* pChild)
@@ -125,5 +154,6 @@ namespace dae
 	{
 		m_pChildren.erase(std::remove(std::begin(m_pChildren), std::end(m_pChildren), pChild));
 	}
+
 
 }

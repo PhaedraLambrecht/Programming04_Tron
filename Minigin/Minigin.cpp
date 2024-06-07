@@ -5,14 +5,20 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Minigin.h"
-#include "InputManager.h"
-#include "SceneManager.h"
-#include "Renderer.h"
-#include "ResourceManager.h"
+#include "Input/InputManager.h"
+#include "Scene/SceneManager.h"
+#include "Base/Renderer.h"
+#include "Resources/ResourceManager.h"
 
-#include "Time.h"
+#include "GameTime.h"
 #include <chrono>
 #include <thread>
+
+#include "Events/EventManager.h"
+#include "Sound/SoundManager.h"
+#include "Sound/SDLSoundSystem.h"
+
+#include <iostream>
 
 
 void PrintSDLVersion()
@@ -43,11 +49,11 @@ void PrintSDLVersion()
 		version.major, version.minor, version.patch);
 }
 
-dae::Minigin::Minigin(const std::string &dataPath)
+dae::Minigin::Minigin(const std::string& dataPath, int windowWidth, int windowHeight)
 {
 	PrintSDLVersion();
-	
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
@@ -56,11 +62,11 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		windowWidth,
+		windowHeight,
 		SDL_WINDOW_OPENGL
 	);
-	if (m_window == nullptr) 
+	if (m_window == nullptr)
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
@@ -68,11 +74,16 @@ dae::Minigin::Minigin(const std::string &dataPath)
 	Renderer::GetInstance().Init(m_window);
 
 	ResourceManager::GetInstance().Init(dataPath);
+	auto& sounds = SoundManager::GetInstance();
+	sounds.Init(dataPath);
+
+	sounds.SetSoundSystem(std::make_unique<SDLSoundSystem>());
 }
 
 dae::Minigin::~Minigin()
 {
 	Renderer::GetInstance().Destroy();
+	SoundManager::GetInstance().Destroy();
 	SDL_DestroyWindow(m_window);
 	m_window = nullptr;
 	SDL_Quit();
@@ -86,6 +97,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
+	auto& eventHandler = EventManager::GetInstance();
 
 
 	bool doContinue = true;
@@ -93,16 +105,17 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	while (doContinue)
 	{
-		Time::GetInstance().Update();
-		lag += Time::GetInstance().GetDeltaTime();
+		GameTime::GetInstance().Update();
+		lag += GameTime::GetInstance().GetDeltaTime();
 
 
 		doContinue = input.ProcessInput();
+		eventHandler.HandleEvents();
 
-		while (lag >= Time::GetInstance().GetFixedTimeStep())
+		while (lag >= GameTime::GetInstance().GetFixedTimeStep())
 		{
-			// fixedUpdate(Time::GetInstance().GetFixedTimeStep());
-			lag -= Time::GetInstance().GetFixedTimeStep();
+			sceneManager.FixedUpdate(GameTime::GetInstance().GetFixedTimeStep());
+			lag -= GameTime::GetInstance().GetFixedTimeStep();
 
 		}
 
@@ -110,7 +123,12 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		renderer.Render();
 
 
-		const auto sleepTime = Time::GetInstance().GetPreviousTime() + std::chrono::milliseconds(Time::GetInstance().GetMSPerFrame()) - std::chrono::high_resolution_clock::now();
+		const auto sleepTime = GameTime::GetInstance().GetPreviousTime() + std::chrono::milliseconds(GameTime::GetInstance().GetMSPerFrame()) - std::chrono::high_resolution_clock::now();
 		std::this_thread::sleep_for(sleepTime);
 	}
+}
+
+SDL_Window* dae::Minigin::GetWindow()
+{
+	return m_window;
 }
